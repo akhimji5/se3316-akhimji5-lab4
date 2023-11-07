@@ -68,7 +68,6 @@ searchButton.addEventListener('click', () => {
     fetch(`/search?field=${field}&keyword=${keyword}&n=${n}`)
         .then(response => response.json())
         .then(ids => {
-            console.log(ids)
             const fetchPromises = ids.map(id => {
                 const superheroPromise = fetch(`/superhero/${id}`).then(response => response.json());
                 const powersPromise = fetch(`/superhero/${id}/powers`).then(response => response.json());
@@ -269,7 +268,6 @@ sortButton.addEventListener('click', () => {
         });
     }
     else{
-        
         searchResultsArray.sort((a, b) => {
             const fieldA = a[sortCategoryValue].toString().toLowerCase();
             const fieldB = b[sortCategoryValue].toString().toLowerCase();
