@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realm of Heros</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Realm of Heros</h1>
+
+    <!-- Search Superheroes -->
+    <div>
+        <h2>Search Superheroes</h2>
+        <input type="text" id="searchField" placeholder="Enter search keyword">
+        <select id="searchCategory">
+            <option value="name">Name</option>
+            <option value="Race">Race</option>
+            <option value="Publisher">Publisher</option>
+            <option value="power">Power</option>
+        </select>
+        <input type="number" id="n" name="quantity" min="0" step="1" placeholder = "# of Results">
+        <button id="searchButton">Search</button>
+        <button id="clearButton">Clear</button>
+    </div>
+
+    <!-- Create  List -->
+    <div id="createList">
+        <h2>Create a List</h2>
+        <input id="newList" type="text" placeholder="Enter List Name">
+        <button id="createListButton">Create List</button>
+    </div>
+
+    <!-- Add Superhero to List -->
+    <div id="addSuperheroToList">
+        <h2>Add Superhero to List</h2>
+        <input id="superheroAdd" type="text" placeholder="Enter Superhero ID">
+        <select id="listSelectForAdd">
+            <option value="" disabled selected>Select a List</option>
+            <!-- Populate list options dynamically as well -->
+        </select>
+        <button id="addSuperheroButton">Add Superhero</button>
+    </div>
+
+    <!-- Retrieve Lists -->
+    <div id="retrieveLists">
+        <h2>Lists</h2>
+        <select id="listSelect">
+            <option value="" disabled selected>Select a List</option>
+        </select>
+        <button id="getListButton">Get List</button>
+        <button id="deleteListButton">Delete List</button>
+        <button id="clearButton2">Clear</button>
+    </div>
+
+    <!-- Sort Data -->
+    <div>
+        <h2>Sort Data</h2>
+        <select id="sortCategory">
+            <option value="name">Name</option>
+            <option value="Race">Race</option>
+            <option value="Publisher">Publisher</option>
+            <option value="power">Power</option>
+        </select>
+        <button id="sortButton">Sort</button>
+    </div>
+
+    <!-- Display Superheroes in a List -->
+    <div class = "searchResultsDiv", id="searchResultsDiv">
+        <h2>Search Results</h2>
+        <ul class = "searchResults", id="searchResults"></ul>
+    </div>
+
+    <script defer src="script.js"></script>
+</body>
+
+</html>
