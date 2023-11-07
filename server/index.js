@@ -30,6 +30,10 @@ app.get('/superhero/:id/powers', (req, res) => {
   }
 
   const powers = superheroPowers.find(power => power.hero_names === superhero.name);
+
+  if (!powers) {
+    return res.status(404).json({ error: 'Superhero not found' });
+  }
   
   const truePowers = Object.keys(powers).filter(powerName => powers[powerName] === 'True');
   
@@ -63,7 +67,7 @@ app.get('/search', (req, res) => {
       );
     });
   } else {
-    matchingSuperheroes = superheroInfo.filter((hero) =>
+    matchingSuperheroes = superheroInfo.filter((hero) => 
       hero[field] &&
       hero[field].toString().toLowerCase().includes(keyword.toLowerCase())
     );
@@ -121,7 +125,8 @@ app.put('/lists/:listName', (req, res) => {
     return res.status(409).json({ error: 'Superhero(s) already exist in the list' });
   }
 
-  lists[listName] = superheroIds;
+  superheroIds.forEach(superheroId => {lists[listName].push(superheroId)})
+
   res.status(200).json({ message: `Superhero list '${listName}' updated successfully.`});
 });
 
