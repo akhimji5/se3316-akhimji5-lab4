@@ -52,7 +52,7 @@ function displayResults(element, data) {
             Skin color: ${superhero['Skin color']}<br>
             Alignment: ${superhero.Alignment}<br> 
             Weight: ${Array.isArray(superhero.Weight) ? superhero.Weight.join('/') : superhero.Weight}<br> 
-            Powers: ${Array.isArray(superhero.powers) ? superhero.powers.join(', ') : superhero.powers}<br>
+            Powers: ${Array.isArray(superhero.powers) && superhero.powers.length > 0 ? superhero.powers.join(', ') : 'No powers available'}<br>
         `;
         superheroListElement.appendChild(superheroDiv)
         element.appendChild(superheroListElement);
@@ -189,7 +189,7 @@ getListButton.addEventListener("click", () => {
             Skin color: ${superhero['Skin color']}<br>
             Alignment: ${superhero.Alignment}<br> 
             Weight: ${Array.isArray(superhero.Weight) ? superhero.Weight.join('/') : superhero.Weight}<br> 
-            Powers: ${Array.isArray(superhero.powers) ? superhero.powers.join(', ') : superhero.powers}<br>
+            Powers: ${Array.isArray(superhero.powers) && superhero.powers.length > 0 ? superhero.powers.join(', ') : 'No powers available'}<br>
         `;
                 superheroListElement.appendChild(superheroDiv);
                 searchResults.appendChild(superheroListElement)
