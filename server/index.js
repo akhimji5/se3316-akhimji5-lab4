@@ -13,7 +13,7 @@ const superheroPowers = require('./superhero_powers.json');
 
 // Create an endpoint to get all superhero information by ID
 app.get('/superhero/:id', (req, res) => {
-  const id = req.params.id;
+  const id = req.params.id.trim();
   const superhero = superheroInfo.find(hero => hero.id.toString() === id);
   if (!superhero) {
     return res.status(404).json({ error: 'Superhero not found' });
@@ -23,7 +23,7 @@ app.get('/superhero/:id', (req, res) => {
 
 // Create an endpoint to get all powers by superhero ID
 app.get('/superhero/:id/powers', (req, res) => {
-  const id = req.params.id;
+  const id = req.params.id.trim();
   const superhero = superheroInfo.find(hero => hero.id.toString() === id);
   if (!superhero) {
     return res.status(404).json({ error: 'Superhero not found' });
@@ -32,7 +32,7 @@ app.get('/superhero/:id/powers', (req, res) => {
   const powers = superheroPowers.find(power => power.hero_names === superhero.name);
 
   if (!powers) {
-    return res.status(404).json({ error: 'Superhero not found' });
+    return res.status(404).json({ error: 'Superhero powers not found' });
   }
   
   const truePowers = Object.keys(powers).filter(powerName => powers[powerName] === 'True');
@@ -50,15 +50,18 @@ app.get('/publishers', (req, res) => {
 // Create an endpoint to search for superheroes by a specific field
 app.get('/search', (req, res) => {
   const { field, keyword, n } = req.query;
-  if (!field || !keyword) {
+  const sanitizedField = field.trim();
+  const sanitizedKeyword = keyword.trim();
+
+  if (!sanitizedField || !sanitizedKeyword) {
     return res.status(400).json({ error: 'Field and Keyword are required' });
   }
 
   let matchingSuperheroes = [];
 
-  if (field === 'power') {
+  if (sanitizedField === 'power') {
     const matchingPowerHeroes = superheroPowers.filter((power) =>
-      power[keyword] === 'True'
+      power[sanitizedKeyword] === 'True'
     );
 
     matchingSuperheroes = superheroInfo.filter((hero) => {
@@ -67,20 +70,20 @@ app.get('/search', (req, res) => {
       );
     });
   } else {
-    matchingSuperheroes = superheroInfo.filter((hero) => 
-      hero[field] &&
-      hero[field].toString().toLowerCase().includes(keyword.toLowerCase())
+    matchingSuperheroes = superheroInfo.filter((hero) =>
+      hero[sanitizedField] &&
+      hero[sanitizedField].toString().toLowerCase().includes(sanitizedKeyword.toLowerCase())
     );
   }
 
   if (matchingSuperheroes.length === 0) {
-    return res.status(404).json({ error: 'No matching superheroes found' });
+    return res.status(404).json({ message: 'No matching superheroes found' });
   }
 
   var firstNMatchingSuperheroIDs = matchingSuperheroes.map(hero => hero.id);
 
-  if(n>0){
-    firstNMatchingSuperheroIDs = firstNMatchingSuperheroIDs.slice(0, n)
+  if (n > 0) {
+    firstNMatchingSuperheroIDs = firstNMatchingSuperheroIDs.slice(0, n);
   }
 
   res.json(firstNMatchingSuperheroIDs);
@@ -96,10 +99,10 @@ app.get('/lists', (req, res) => {
 app.post('/lists', (req, res) => {
   const { listName } = req.body;
   if (!listName) {
-    return res.status(400).json({ error: 'List name is required' });
+    return res.status(400).json({ message: 'List name is required' });
   }
   if (lists[listName]) {
-    return res.status(409).json({ error: 'List with the same name already exists' });
+    return res.status(409).json({ message: 'List with the same name already exists' });
   }
 
   lists[listName] = [];
@@ -111,18 +114,18 @@ app.put('/lists/:listName', (req, res) => {
   const listName = req.params.listName;
   const { superheroIds } = req.body;
   if (!superheroIds) {
-    return res.status(400).json({ error: 'Superhero IDs are required' });
+    return res.status(400).json({ message: 'Superhero IDs are required' });
   }
 
   if (!lists[listName]) {
-    return res.status(404).json({ error: 'List does not exist' });
+    return res.status(404).json({ message: 'List does not exist' });
   }
 
   const existingSuperheroes = lists[listName];
   const duplicateSuperheroes = superheroIds.filter(id => existingSuperheroes.includes(id));
 
   if (duplicateSuperheroes.length > 0) {
-    return res.status(409).json({ error: 'Superhero(s) already exist in the list' });
+    return res.status(409).json({ message: 'Superhero(s) already exist in the list' });
   }
 
   superheroIds.forEach(superheroId => {lists[listName].push(superheroId)})
@@ -134,7 +137,7 @@ app.put('/lists/:listName', (req, res) => {
 app.get('/lists/:listName/superheroes', (req, res) => {
   const listName = req.params.listName;
   if (!lists[listName]) {
-    return res.status(404).json({ error: 'List does not exist' });
+    return res.status(404).json({ message: 'List does not exist' });
   }
 
   const superheroIDs = lists[listName];
@@ -156,7 +159,7 @@ app.delete('/lists/:listName', (req, res) => {
 app.get('/lists/:listName/superheroes/info', (req, res) => {
   const listName = req.params.listName;
   if (!lists[listName]) {
-    return res.status(404).json({ error: 'List does not exist' });
+    return res.status(404).json({ message: 'List does not exist' });
   }
 
   const superheroIDs = lists[listName];
