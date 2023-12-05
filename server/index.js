@@ -11,6 +11,11 @@ app.use(express.urlencoded({ extended: true }));
 const UserRouter = require('./routes/user')
 app.use('/user', UserRouter)
 
+const SuperheroRouter = require('./routes/superhero')
+app.use('/superhero', SuperheroRouter)
+
+const ListRouter = require('./routes/list')
+app.use('/list', ListRouter)
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);

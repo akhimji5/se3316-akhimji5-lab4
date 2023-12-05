@@ -5,7 +5,17 @@ const UserSchema = new Schema({
     name: String,
     email: String,
     password: String,
-    verfified: Boolean
+    verified: Boolean,
+    isAdmin: {
+        type: Boolean,
+        default: false
+
+    },
+    isDisabled: {
+        type: Boolean,
+        default: false
+
+    },
 });
 
 const User = mongoose.model('User', UserSchema);
