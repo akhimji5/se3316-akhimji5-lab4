@@ -14,8 +14,6 @@ const SuperheroSchema = new mongoose.Schema({
     alignment: String,
     weight: Number,
     powers: [String]
-
-    
 });
 
 const Superhero = mongoose.model('Superhero', SuperheroSchema);
