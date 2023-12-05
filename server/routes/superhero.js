@@ -3,7 +3,7 @@ const router = express.Router();
 const Superhero = require('../models/superhero');
 
 // Create an endpoint to get all superhero information by ID
-router.get('getById/:id', async (req, res) => {
+router.get('/getById/:id', async (req, res) => {
   const id = req.params.id.trim();
   try {
     const superhero = await Superhero.findOne({ id });
@@ -18,7 +18,7 @@ router.get('getById/:id', async (req, res) => {
 });
 
 // Create an endpoint to get all powers by superhero ID
-router.get('getPowersById/:id/powers', async (req, res) => {
+router.get('/getPowersById/:id/powers', async (req, res) => {
   const id = req.params.id.trim();
   try {
     const superhero = await Superhero.findOne({ id });
