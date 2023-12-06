@@ -1,0 +1,77 @@
+.full-page-background {
+    background-color: #1f1f1f;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-container {
+    text-align: center;
+    padding: 20px;
+    padding-bottom: 50px;
+    border: 2px solid #ff6600;
+
+}
+
+h1 {
+    font-size: 36px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: #ff6600;
+}
+
+.waviy span {
+    display: inline-block;
+}
+
+.app-description {
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.link-container {
+    margin-top: 20px;
+}
+
+.main-link {
+    color: #ff6600;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: 2px solid #ff6600;
+    border-radius: 5px;
+    margin: 0px 10px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.main-link:hover {
+    background-color: #ff9933;
+    color: #fff;
+}
+
+p{
+    margin: 40px;
+}
+
+.link-separator {
+    color: #fff;
+}
+
+.gen-text {
+    color: #fff;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 24px;
+    }
+    .app-description {
+        font-size: 16px;
+    }
+    .main-link {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+}

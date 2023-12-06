@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import MainPage from './components/MainPage';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import HeroFinder from './components/HeroFinder'; 
+import UnauthUsers from './components/UnauthUsers'; 
+import UpdatePassword from './components/updatepassword';
+import AdminPage from './components/AdminPage';
+import DisabledPage from './components/DisabledPage';
+import PrivacyPolicy from './components/PrivacyPolicy';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/signin" element={<Login />} />
+        <Route path = "/PrivacyPolicy" element={<PrivacyPolicy />} />
+        <Route path="/updatepassword" element={<UpdatePassword />} />
+        <Route path = "/AdminPage" element={<AdminPage />} />
+        <Route path = "/DisabledPage" element={<DisabledPage />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path = "/unauthusers" element={<UnauthUsers />} />
+        <Route path="/herofinder" element={<HeroFinder />} />
+      </Routes>
+    </Router>
   );
 }
 

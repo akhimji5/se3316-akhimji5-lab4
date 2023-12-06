@@ -261,10 +261,22 @@ router.post('/signin', (req, res) => {
                     const hashedPassword = data[0].password;
                     bcrypt.compare(password, hashedPassword).then(result => {
                         if (result) {
+                            console.log(data[0]._id);
+                            console.log(data[0].name);
+                            console.log(data[0].isAdmin);
+                            console.log(data[0].isDisabled);
+                            console.log(data[0].email);
+                    
                             res.json({
                                 status: "SUCCESS",
                                 message: "Signin successful",
-                                data: data
+                                data: {
+                                    _id: data[0]._id,
+                                    name: data[0].name,
+                                    isAdmin : data[0].isAdmin,
+                                    isDisabled : data[0].isDisabled,
+                                    email: data[0].email  
+                                }
                             })
                         } else {
                             res.json({
@@ -379,7 +391,7 @@ router.post('/toggleDisable/:userId', isAdmin, async (req, res) => {
         user.isDisabled = !user.isDisabled;
         await user.save()
 
-        res.status(500).json({
+        res.status(200).json({
             status: 'SUCCESS',
             message: "User disabled status updated successfully!"
         })
