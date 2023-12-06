@@ -338,7 +338,7 @@ router.post('/makeAdmin/:userId', isAdmin, (req, res) => {
 
     User.findByIdAndUpdate(userId, { isAdmin: true })
         .then(() => {
-            res.json({
+            res.status(200).json({
                 status: 'SUCCESS',
                 message: 'Admin privilege granted to the user.'
             });

@@ -28,7 +28,7 @@ function AdminPage() {
 
     const fetchUsers = async () => {
         try {
-            const response = await axios.get('/user/users');
+            const response = await axios.get('http://localhost:5000/user/users');
             setUsers(response.data.data);
         } catch (error) {
             console.error('Error fetching users:', error);
@@ -198,7 +198,7 @@ function AdminPage() {
     const handleGrantManagerPrivileges = async (userId) => {
         const adminUserId = localStorage.getItem('userId');
         try {
-            const response = await axios.put(`http://localhost:5000/user/makeAdmin/${userId}`, {
+            const response = await axios.post(`http://localhost:5000/user/makeAdmin/${userId}`, {
                 userId: adminUserId
             });
             alert('Admin privileges granted');
