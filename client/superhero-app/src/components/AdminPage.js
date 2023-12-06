@@ -37,7 +37,7 @@ function AdminPage() {
 
     const fetchPublicLists = async () => {
         try {
-            const response = await axios.get('/list/publicFavoriteLists');
+            const response = await axios.get('http://localhost:5000/list/publicFavoriteLists');
             setPublicLists(response.data.map(list => ({ ...list, showDetails: false })));
         } catch (error) {
             console.error('Error fetching public lists:', error);
