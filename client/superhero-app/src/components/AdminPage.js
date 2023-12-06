@@ -28,7 +28,7 @@ function AdminPage() {
 
     const fetchUsers = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/user/users');
+            const response = await axios.get('/user/users');
             setUsers(response.data.data);
         } catch (error) {
             console.error('Error fetching users:', error);
@@ -37,7 +37,7 @@ function AdminPage() {
 
     const fetchPublicLists = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/list/publicFavoriteLists');
+            const response = await axios.get('/list/publicFavoriteLists');
             setPublicLists(response.data.map(list => ({ ...list, showDetails: false })));
         } catch (error) {
             console.error('Error fetching public lists:', error);
