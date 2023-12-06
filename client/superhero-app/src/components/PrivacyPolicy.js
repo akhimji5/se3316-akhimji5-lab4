@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import './PrivacyPolicy.css'; 
+import './PrivacyPolicy.css';
 import { useNavigate } from 'react-router-dom';
 
 function PrivacyPolicy() {
@@ -19,6 +19,7 @@ function PrivacyPolicy() {
         <div className="privacy-policy-container">
             <h1>RealmOfHeroes: Security and Privacy Policy</h1>
 
+            <p></p>
             <section className="policy-section">
                 <h3>Introduction</h3>
                 <p>At RealmOfHeroes, safeguarding the security and privacy of our users is paramount. This policy delineates our practices concerning the gathering, utilization, and safeguarding of personal information.</p>
